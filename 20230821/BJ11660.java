@@ -33,16 +33,10 @@ public class BJ11660 {
 			int x2 = Integer.parseInt(st.nextToken());
 			int y2 = Integer.parseInt(st.nextToken());
 			int result = 0;
-			if(x1==x2 && y1==y2) {
-				result = array[x1][y1];
-			}
-			else {
-				for(int j=x1;j<=x2;j++) {
-					result+= arraySum[j][y2];
-					if(y1>1) {
-						result-= arraySum[j][y1-1];
-					}
-				}
+			for(int j=x1;j<=x2;j++) {
+				result+= arraySum[j][y2];
+				if(y1>1) 
+					result-= arraySum[j][y1-1];		
 			}
 			bw.write(result+"\n");
 		}
