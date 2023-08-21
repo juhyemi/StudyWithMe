@@ -9,3 +9,5 @@
 [![solved.ac tier](http://mazassumnida.wtf/api/generate_badge?boj=rlawngp124)](https://solved.ac/rlawngp124)
 
 ● **hansol** 　
+
+[![solved.ac tier](http://mazassumnida.wtf/api/generate_badge?boj=hansol1021)](https://solved.ac/hansol1021)
