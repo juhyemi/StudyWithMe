@@ -23,8 +23,8 @@ class Solution {
             ls.get(wires[i][1]).remove(b);
             
             visit = new boolean[n+1];
-            int k = BFS(1,0); 
-            int tmp = Math.abs((n-k)-k);
+            int k = BFS(1,0); //트리구조기 때문에 아무 인덱스로 시작해도 결과는 같음 -> 고정값 1로 bfs탐색
+            int tmp = Math.abs((n-k)-k); // n개의 노드에서 k개를 탐색, 전력망을 두 개로 나누기 때문에 k개와 (n-k)개로 나뉨. 두 개의 차이를 최소화하는 값을 찾는 것이기 때문에 절댓값으로 계산
             if(gap>tmp) gap=tmp;
             
             ls.get(wires[i][0]).add(wires[i][1]);
