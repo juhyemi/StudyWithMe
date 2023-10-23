@@ -1,0 +1,52 @@
+import java.util.*;
+class Solution {
+    static List<List<Integer>> ls = new ArrayList<>();
+    static boolean[] visit;
+    static int m;
+    public int solution(int n, int[][] wires) {
+        for(int i=0; i<=n; i++){
+            ls.add(new ArrayList<>()); 
+        };
+        
+        m = wires.length;
+        for(int i=0; i<m; i++){
+            int a=wires[i][0];
+            int b=wires[i][1];
+            ls.get(a).add(b);
+            ls.get(b).add(a);
+        }//map 
+        int gap=n;
+        for(int i=0; i<m; i++){
+            int a = ls.get(wires[i][0]).indexOf(wires[i][1]);
+            int b = ls.get(wires[i][1]).indexOf(wires[i][0]);
+            ls.get(wires[i][0]).remove(a);
+            ls.get(wires[i][1]).remove(b);
+            
+            visit = new boolean[n+1];
+            int k = BFS(1,0); 
+            int tmp = Math.abs((n-k)-k);
+            if(gap>tmp) gap=tmp;
+            
+            ls.get(wires[i][0]).add(wires[i][1]);
+            ls.get(wires[i][1]).add(wires[i][0]);
+        }
+        
+        return gap;
+    }
+    static int BFS(int start, int cnt){
+        Queue<Integer> q = new LinkedList<>();
+        q.add(start);
+        while(!q.isEmpty()) {
+            int k = q.poll();
+            visit[k] = true;
+            cnt++;
+            for(int i=0; i<ls.get(k).size(); i++){
+                int chk = ls.get(k).get(i);
+                if(!visit[chk]){
+                    q.add(chk);
+                }
+            }
+        }       
+        return cnt;
+    }
+}
