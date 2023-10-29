@@ -1,0 +1,21 @@
+import java.util.*;
+class Solution {
+    public boolean solution(String[] phone_book) {
+        boolean answer = true;
+        //map에 전화번호를 key값으로 담아주고 인덱스랑 같이 담아줌
+        HashMap<String,Integer> map = new HashMap<>();
+        for(int i=0; i<phone_book.length; i++){
+            map.put(phone_book[i], i);
+        }
+        //인덱스를 담은 이유는 해당 인덱스 순서일 때 phone_book에 있는 string길이 파악을 위해서 => substring이용해서 풀기위함
+        for(int i=0; i<phone_book.length; i++){
+            for(int j=0; j<phone_book[i].length(); j++){
+                if(map.containsKey(phone_book[i].substring(0,j))){
+                    answer = false;
+                    break;
+                }
+            }
+        }
+        return answer;
+    }
+}
