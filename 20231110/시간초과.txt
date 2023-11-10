@@ -1,0 +1,26 @@
+import java.util.*;
+class Solution {
+    public int solution(int[] scoville, int k) {
+        int answer = 0;
+        Arrays.sort(scoville);
+        List<Integer> ls = new ArrayList<>();
+        for(int i:scoville) ls.add(i);
+        while(true){
+            if(ls.get(0)==0){
+                answer=-1;
+                break;
+            }
+            int i=0;
+            if(ls.get(i)<k){
+                int o=ls.get(i)+ls.get(i+1)*2;
+                ls.set(i,o);
+                ls.remove(ls.get(i+1));
+                answer++;
+            }else{
+                break;
+            }
+            Collections.sort(ls);
+        }
+        return answer;
+    }
+}
