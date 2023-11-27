@@ -1,0 +1,28 @@
+class Solution {
+    public int solution(int[] bandage, int health, int[][] attacks) {
+        int max = health;
+        int needtime = bandage[0];
+        int restore = bandage[1];
+        int add = bandage[2];
+        int nowtime = 0;        
+        
+        for(int i=0; i<attacks.length; i++){
+            if(health<=0) return -1;
+            
+            if(attacks[i][0]>=(nowtime+needtime)){
+                //성공
+                health+=(((attacks[i][0]-nowtime)/needtime)*add)+((attacks[i][0]-nowtime)*restore);
+                if(health>=max) health=max;
+                health-=attacks[i][1];
+            }else{
+                //실패
+                if(health<max) health+=(attacks[i][0]-nowtime)*restore; 
+                if(health>=max) health=max;
+                health-=attacks[i][1];
+            }
+            nowtime = attacks[i][0]+1;
+        } 
+        if(health<=0) return -1;
+        return health;
+    }
+}
