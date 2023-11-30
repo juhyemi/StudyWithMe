@@ -1,0 +1,64 @@
+import java.util.*;
+class Solution {
+    static int[][] visit;
+    static int[] dx = {1,-1,0,0};
+    static int[] dy = {0,0,1,-1};
+    static List<Integer> ls = new ArrayList<>();
+    public int solution(int[][] land) {
+        int answer=0;
+        visit = new int[land.length][land[0].length];
+        int count =1;
+        for(int i=0; i<land.length; i++){
+            for(int j=0; j<land[i].length; j++){
+                if(land[i][j]==1&&visit[i][j]==0){
+                    BFS(i,j,count, land);
+                    count++;
+                }
+            }
+        }
+
+        for(int i=0; i<land[0].length; i++){
+            Set<Integer> set = new HashSet<>();
+            int tmp=0;
+            for(int j=0; j<land.length; j++){
+                if(visit[j][i]!=0) set.add(visit[j][i]);
+            }
+            Iterator<Integer> iter = set.iterator();
+            while(iter.hasNext()){
+                int k = iter.next();
+                tmp += ls.get(k-1);
+            }
+            answer = Math.max(tmp, answer);
+        }
+        
+        return answer;
+    }
+    static void BFS(int sx, int sy,int cnt,int[][] land){
+        Queue<Point> q = new LinkedList<>();
+        q.add(new Point(sx,sy));
+        int count =0;
+        while(!q.isEmpty()){
+            count++;
+            Point p = q.poll();
+            int x = p.x;
+            int y = p.y;
+            visit[x][y] = cnt;
+            for(int i=0; i<4; i++){
+                int nx = x+dx[i];
+                int ny = y+dy[i];
+                if(nx>=0&&nx<land.length&&ny>=0&&ny<land[0].length&&visit[nx][ny]==0&&land[nx][ny]==1){
+                    q.add(new Point(nx,ny));
+                    visit[nx][ny] = cnt;
+                }
+            }
+        }
+        ls.add(count);
+    }
+}
+class Point{
+    int x,y;
+    Point(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+}
