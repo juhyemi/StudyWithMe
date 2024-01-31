@@ -1,0 +1,42 @@
+import java.util.*;
+class Solution {
+    static int[] dx ={1,-1,0,0,-1,-1,1,1};//하,상,우,좌,왼위,오위,왼아래,오아래
+    static int[] dy ={0,0,1,-1,-1,1,-1,1};
+    static int answer,n;
+    static boolean visit[][];
+    public int solution(int[][] board) {
+        answer = 0;
+        n=board.length;
+        visit = new boolean[n][n];
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                if(board[i][j]==1){
+                    CHK(i,j,board);
+                }
+            }
+        }
+        return n*n-answer;
+    }
+    static void CHK(int x, int y, int[][] board){
+        if(!visit[x][y]){
+            visit[x][y]=true;
+            answer++;
+        }
+        for(int i=0; i<8; i++){
+            int nx=x+dx[i];
+            int ny=y+dy[i];
+            if(nx>=0&&ny>=0&&nx<n&&ny<n&&!visit[nx][ny]){
+                answer++;
+                visit[nx][ny]=true;
+            }
+        }
+        
+    }
+}
+class Point{
+    int x,y;
+    Point(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
+}
