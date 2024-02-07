@@ -1,0 +1,22 @@
+class Solution {
+    public int solution(int n, int[] stations, int w) {
+        int answer = 0;
+        int impec=2*w+1;
+        int start=1;
+        for(int i=0; i<stations.length; i++){
+            int now=stations[i];
+            if(start<now-w){
+                double plus=Math.ceil((double)(now-w-start)/impec);
+                answer+=plus;
+            }
+            start = now+w+1;
+        }
+        if(start<=n){
+            if(start==n) answer++;
+            double plus=Math.ceil((double)(n-start)/impec);
+            answer+=plus;
+        }
+
+        return answer;
+    }
+}
