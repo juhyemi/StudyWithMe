@@ -1,0 +1,29 @@
+import java.util.*;
+class Solution {
+    public int solution(String skill, String[] skill_trees) {
+        int answer = 0;
+        for(int j=0; j<skill_trees.length; j++){
+            String s = skill_trees[j];
+            int[] tmp = new int[skill.length()];
+            boolean flag=true;
+            for(int i=0; i<skill.length(); i++){
+                String str = String.valueOf(skill.charAt(i));
+                int k=s.indexOf(str);
+                tmp[i] = k;
+                if(i!=0){
+                    if(k>=0&&k<tmp[i-1]){
+                        flag=false;
+                        break;
+                    }
+                    if(tmp[i-1]<0&&k>=0){
+                        flag=false;
+                        break;
+                    }
+                }
+            }
+            if(flag) answer++;
+        }
+            
+        return answer;
+    }
+}
