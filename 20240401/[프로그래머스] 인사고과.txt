@@ -1,0 +1,22 @@
+import java.util.*;
+class Solution {
+    public int solution(int[][] scores) {
+        int answer = 1;
+        int w1 = scores[0][0];
+        int w2 = scores[0][1];
+        HashMap<Integer,Integer> map = new HashMap<>();
+        Arrays.sort(scores, (o1,o2)->o1[0]==o2[0]?o1[1]-o2[1]:o2[0]-o1[0]);
+        int k=scores[0][1];
+        for(int i=0; i<scores.length; i++){
+            if(k>scores[i][1]){
+                if(w1==scores[i][0]&&w2==scores[i][1]){
+                    return -1;
+                }
+                continue;
+            }
+            k=scores[i][1];
+            if(w1+w2<scores[i][0]+scores[i][1]) answer++;
+        }   
+        return answer;
+    }
+}
