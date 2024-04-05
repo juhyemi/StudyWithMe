@@ -1,0 +1,31 @@
+import java.util.*;
+class Solution {
+    static int answer;
+    public int solution(String s) {
+        answer=0;
+        int n=s.length();
+        for(int i=0; i<n; i++){
+            String now = "";
+            for(int j=i; j<n+i; j++){
+                int k=j;
+                if(j>=n) k=j-n;
+                now+=String.valueOf(s.charAt(k));
+            }
+            CHK(now);
+        } 
+        return answer;
+    }
+    static void CHK(String str){
+        while(!str.equals("")){
+            String tmp = str;
+           str=str.replace("()", "");
+           str=str.replace("{}", "");
+           str=str.replace("[]", "");
+            if(str.equals(tmp)) {
+                return;
+            }
+        }
+        answer++;
+    }
+    
+}
