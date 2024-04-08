@@ -1,0 +1,15 @@
+class Solution {
+    public int[] solution(String s) {
+        int cnt=0;
+        int total =0;
+        while(!s.equals("1")){
+         total++; 
+         int init = s.length();
+         s = s.replaceAll("0","");
+         cnt+=init-s.length();
+         s = Integer.toBinaryString(s.length());
+        }
+        int[] answer={total, cnt};
+        return answer;
+    }
+}
