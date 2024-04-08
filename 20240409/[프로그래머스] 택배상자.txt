@@ -1,0 +1,32 @@
+import java.util.*;
+class Solution {
+    public int solution(int[] order) {
+        Stack<Integer> st = new Stack<>();
+        int num = 1; 
+        int i = 0;
+        int count=0;
+        while(true){
+            if(i==order.length) break;
+            if(!st.isEmpty()&&st.peek()>order[i]) break;
+            boolean flag=true;
+            if(num==order[i]){
+                count++;
+                num++;
+                i++;
+                flag=false;
+            }
+            if(!st.isEmpty()&&st.peek()==order[i]){
+                count++;
+                i++;
+                st.pop();
+                flag=false;
+            }
+            if(flag){
+                st.push(num);
+                num++;
+            }
+
+        }  
+        return count;
+    }
+}
